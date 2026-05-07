@@ -1,0 +1,118 @@
+\babel@toc {french}{}\relax 
+\contentsline {chapter}{Résumé}{i}{chapter*.1}%
+\contentsline {chapter}{\numberline {1}Exceptions Système}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Exercice 1 -- Division Sécurisée}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Objectif}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Code source}{1}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Explication}{2}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Exercice 2 -- NullPointerException}{2}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Objectif}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Code source}{2}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Explication}{3}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Exercice 3 -- Tableau Sécurisé}{3}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Objectif}{3}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Code source}{3}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Comparaison des deux approches}{4}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Exercice 4 -- Conversion d'Entier}{4}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Objectif}{4}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Code source}{4}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Explication}{4}{subsection.1.4.3}%
+\contentsline {section}{\numberline {1.5}Exercice 5 -- Choix d'Exception}{4}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Objectif}{4}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Code source}{5}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.5.3}Justification du choix}{5}{subsection.1.5.3}%
+\contentsline {section}{\numberline {1.6}Exercice 6 -- IllegalStateException}{5}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Objectif}{5}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Code source}{5}{subsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.6.3}Explication}{6}{subsection.1.6.3}%
+\contentsline {section}{\numberline {1.7}Exercice 7 -- Propagation d'Exception}{6}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}Objectif}{6}{subsection.1.7.1}%
+\contentsline {subsection}{\numberline {1.7.2}Code source}{6}{subsection.1.7.2}%
+\contentsline {subsection}{\numberline {1.7.3}Schéma de propagation}{6}{subsection.1.7.3}%
+\contentsline {section}{\numberline {1.8}Exercice 8 -- Checked Exception}{6}{section.1.8}%
+\contentsline {subsection}{\numberline {1.8.1}Objectif}{7}{subsection.1.8.1}%
+\contentsline {subsection}{\numberline {1.8.2}Code source}{7}{subsection.1.8.2}%
+\contentsline {subsection}{\numberline {1.8.3}Explication}{7}{subsection.1.8.3}%
+\contentsline {section}{\numberline {1.9}Exercice 9 -- Exception Personnalisée Vérifiée}{7}{section.1.9}%
+\contentsline {subsection}{\numberline {1.9.1}Objectif}{7}{subsection.1.9.1}%
+\contentsline {subsection}{\numberline {1.9.2}Code source}{7}{subsection.1.9.2}%
+\contentsline {section}{\numberline {1.10}Exercice 10 -- Comparaison Checked / Unchecked}{8}{section.1.10}%
+\contentsline {subsection}{\numberline {1.10.1}Objectif}{8}{subsection.1.10.1}%
+\contentsline {subsection}{\numberline {1.10.2}Code source}{8}{subsection.1.10.2}%
+\contentsline {subsection}{\numberline {1.10.3}Comparaison}{9}{subsection.1.10.3}%
+\contentsline {chapter}{\numberline {2}Exceptions Personnalisées}{10}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Exercice 1 -- Compte Bancaire}{10}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Objectif}{10}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Code source}{10}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Explication}{11}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Exercice 2 -- Montant Invalide}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Objectif}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Code source}{11}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Explication}{11}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Exercice 3 -- Double Validation}{12}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Objectif}{12}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Code source}{12}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Exercice 4 -- Inscription Utilisateur}{12}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Objectif}{12}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Code source}{12}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}Exercice 5 -- Authentification}{13}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Objectif}{13}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Code source}{13}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Exercice 6 -- Gestion de Stock}{14}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Objectif}{14}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Code source}{14}{subsection.2.6.2}%
+\contentsline {section}{\numberline {2.7}Exercice 7 -- Téléchargement}{14}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Objectif}{14}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Code source}{14}{subsection.2.7.2}%
+\contentsline {section}{\numberline {2.8}Exercice 8 -- Validation de Formulaire}{15}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Objectif}{15}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}Code source}{15}{subsection.2.8.2}%
+\contentsline {section}{\numberline {2.9}Exercice 9 -- Paiement}{15}{section.2.9}%
+\contentsline {subsection}{\numberline {2.9.1}Objectif}{15}{subsection.2.9.1}%
+\contentsline {subsection}{\numberline {2.9.2}Code source}{15}{subsection.2.9.2}%
+\contentsline {section}{\numberline {2.10}Exercice 10 -- Conception~: Quand Utiliser Chaque Type ?}{16}{section.2.10}%
+\contentsline {subsection}{\numberline {2.10.1}Objectif}{16}{subsection.2.10.1}%
+\contentsline {subsection}{\numberline {2.10.2}Synthèse}{16}{subsection.2.10.2}%
+\contentsline {chapter}{\numberline {3}Généricité}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Exercice 1 -- Classe Générique \texttt {Boite<T>}}{17}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Objectif}{17}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Code source}{17}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Explication}{18}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Exercice 2 -- Classe \texttt {Paire<T, U>}}{18}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Objectif}{18}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Code source}{18}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Exercice 3 -- Interface Générique \texttt {Calcul<T>}}{18}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Objectif}{18}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Code source}{18}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Exercice 4 -- Interface \texttt {Comparateur<T>}}{19}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Objectif}{19}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Code source}{19}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Explication}{19}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Exercice 5 -- Deuxième Implémentation de \texttt {Comparateur<T>}}{20}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Objectif}{20}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Code source}{20}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Exercice 6 -- Méthodes Génériques Statiques}{20}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Objectif}{20}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Code source}{20}{subsection.3.6.2}%
+\contentsline {section}{\numberline {3.7}Exercice 7 -- Borne Supérieure \texttt {<T extends Number>}}{21}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Objectif}{21}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Code source}{21}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.3}Explication}{21}{subsection.3.7.3}%
+\contentsline {section}{\numberline {3.8}Exercice 8 -- Héritage Générique (Animal / Chien)}{22}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Objectif}{22}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.8.2}Code source}{22}{subsection.3.8.2}%
+\contentsline {section}{\numberline {3.9}Exercice 9 -- Héritage Paramétré (Vehicule / Voiture)}{22}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}Objectif}{22}{subsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.9.2}Code source}{22}{subsection.3.9.2}%
+\contentsline {section}{\numberline {3.10}Exercice 10 -- Repository Générique}{23}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Objectif}{23}{subsection.3.10.1}%
+\contentsline {subsection}{\numberline {3.10.2}Code source}{23}{subsection.3.10.2}%
+\contentsline {section}{\numberline {3.11}Exercice 11 -- Wildcard \texttt {<?>}}{23}{section.3.11}%
+\contentsline {subsection}{\numberline {3.11.1}Objectif}{24}{subsection.3.11.1}%
+\contentsline {subsection}{\numberline {3.11.2}Code source}{24}{subsection.3.11.2}%
+\contentsline {subsection}{\numberline {3.11.3}Explication}{24}{subsection.3.11.3}%
+\contentsline {section}{\numberline {3.12}Exercice 12 -- Wildcard Borné \texttt {<? extends Number>}}{24}{section.3.12}%
+\contentsline {subsection}{\numberline {3.12.1}Objectif}{24}{subsection.3.12.1}%
+\contentsline {subsection}{\numberline {3.12.2}Code source}{24}{subsection.3.12.2}%
+\contentsline {subsection}{\numberline {3.12.3}Comparaison des Wildcards}{25}{subsection.3.12.3}%
+\contentsline {chapter}{Conclusion}{26}{chapter*.6}%

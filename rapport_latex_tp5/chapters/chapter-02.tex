@@ -1,0 +1,313 @@
+\chapter{Exceptions Personnalisées}
+\sloppy
+
+\section{Exercice 1 -- Compte Bancaire}
+
+\subsection{Objectif}
+
+Créer une classe \texttt{CompteBancaire} avec \texttt{retirer()} et \texttt{verser()},
+et lever une \texttt{SoldeInsuffisantException} si le montant dépasse le solde.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo1\_2.java -- SoldeInsuffisantException}]
+class SoldeInsuffisantException extends Exception {}
+
+public class exo1_2 {
+
+    String code;
+    double solde;
+
+    public exo1_2(String code, double solde) {
+        this.code = code;
+        this.solde = solde;
+    }
+
+    void verser(exo1_2 e, double montant) {
+        e.solde += montant;
+        System.out.println("Nouveau solde : " + e.solde);
+    }
+
+    void retirer(exo1_2 e, double montant) throws SoldeInsuffisantException {
+        if (montant > e.solde) {
+            throw new SoldeInsuffisantException();
+        }
+        e.solde -= montant;
+        System.out.println("Nouveau solde : " + e.solde);
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+\texttt{SoldeInsuffisantException} hérite de \texttt{Exception} (checked).
+Le mot-clé \texttt{throws} dans la signature de \texttt{retirer()} oblige
+l'appelant à gérer cette situation.
+
+\section{Exercice 2 -- Montant Invalide}
+
+\subsection{Objectif}
+
+Créer une \texttt{MontantInvalideException} levée lorsque le montant est $\leq 0$.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo2\_2.java -- MontantInvalideException}]
+class MontantInvalideException extends RuntimeException {}
+
+public class exo2_2 {
+
+    String code;
+    double solde;
+
+    public exo2_2(String code, double solde) {
+        this.code = code;
+        this.solde = solde;
+    }
+
+    void verser(exo2_2 e, double montant) {
+        if (montant <= 0) {
+            throw new MontantInvalideException();
+        }
+        e.solde += montant;
+        System.out.println("Nouveau solde : " + e.solde);
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+\texttt{MontantInvalideException} hérite de \texttt{RuntimeException}
+(unchecked), car un montant invalide est une erreur de logique qui ne devrait
+jamais se produire en production correcte.
+
+\section{Exercice 3 -- Double Validation}
+
+\subsection{Objectif}
+
+Modifier \texttt{retirer()} pour gérer à la fois \texttt{MontantInvalideException}
+et \texttt{SoldeInsuffisantException}.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo3\_2.java -- Double validation}]
+class SoldeInsuffisantException3 extends Exception {}
+class MontantInvalideException3 extends RuntimeException {}
+
+public class exo3_2 {
+
+    String code;
+    double solde;
+
+    public exo3_2(String code, double solde) {
+        this.code = code;
+        this.solde = solde;
+    }
+
+    void retirer(exo3_2 e, double montant) throws SoldeInsuffisantException3 {
+        if (montant <= 0) {
+            throw new MontantInvalideException3();
+        }
+        if (montant > e.solde) {
+            throw new SoldeInsuffisantException3();
+        }
+        e.solde -= montant;
+        System.out.println("Nouveau solde : " + e.solde);
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 4 -- Inscription Utilisateur}
+
+\subsection{Objectif}
+
+Valider l'email et l'âge lors d'une inscription via deux exceptions personnalisées.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo4\_2.java -- EmailInvalideException \& AgeInvalideException}]
+class EmailInvalideException4 extends Exception {}
+class AgeInvalideException4 extends Exception {}
+
+public class exo4_2 {
+
+    void inscrire(exo4_2 e, String email, int age)
+            throws EmailInvalideException4, AgeInvalideException4 {
+        if (!email.contains("@")) {
+            throw new EmailInvalideException4();
+        }
+        if (age < 18) {
+            throw new AgeInvalideException4();
+        }
+        System.out.println("Inscription reussie");
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 5 -- Authentification}
+
+\subsection{Objectif}
+
+Lever une \texttt{AuthentificationException} avec le message
+\og Identifiants incorrects \fg{} en cas de mauvais login.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo5\_2.java -- AuthentificationException}]
+class AuthentificationException5 extends Exception {}
+
+public class exo5_2 {
+
+    void login(exo5_2 e, String username, String password)
+            throws AuthentificationException5 {
+        if (!username.equals("admin") || !password.equals("1234")) {
+            throw new AuthentificationException5();
+        }
+        System.out.println("Connexion reussie");
+    }
+
+    public static void main(String[] args) {
+        exo5_2 e = new exo5_2();
+        try {
+            e.login(e, "user", "wrong");
+        } catch (AuthentificationException5 ex) {
+            System.out.println("Identifiants incorrects");
+        }
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 6 -- Gestion de Stock}
+
+\subsection{Objectif}
+
+Lever une \texttt{StockInsuffisantException} si la quantité demandée dépasse le stock disponible.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo6\_2.java -- StockInsuffisantException}]
+class StockInsuffisantException6 extends Exception {}
+
+public class exo6_2 {
+    int stock;
+
+    public exo6_2(int stock) {
+        this.stock = stock;
+    }
+
+    void retirerDuStock(exo6_2 p, int quantite)
+            throws StockInsuffisantException6 {
+        if (quantite > p.stock) {
+            throw new StockInsuffisantException6();
+        }
+        p.stock -= quantite;
+        System.out.println("Stock restant : " + p.stock);
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 7 -- Téléchargement}
+
+\subsection{Objectif}
+
+Lever une \texttt{QuotaDepasseException} si la taille d'un fichier dépasse la limite autorisée.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo7\_2.java -- QuotaDepasseException}]
+class QuotaDepasseException7 extends Exception {}
+
+public class exo7_2 {
+    double limite = 500.0;
+
+    void telechargerFichier(exo7_2 e, double taille)
+            throws QuotaDepasseException7 {
+        if (taille > e.limite) {
+            throw new QuotaDepasseException7();
+        }
+        System.out.println("Telechargement fini");
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 8 -- Validation de Formulaire}
+
+\subsection{Objectif}
+
+Lever une \texttt{ChampObligatoireException} si un champ du formulaire est vide ou nul.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo8\_2.java -- ChampObligatoireException}]
+class ChampObligatoireException8 extends Exception {}
+
+public class exo8_2 {
+
+    void validerFormulaire(exo8_2 e, String nom, String email)
+            throws ChampObligatoireException8 {
+        if (nom == null || nom.isEmpty() || email == null || email.isEmpty()) {
+            throw new ChampObligatoireException8();
+        }
+        System.out.println("Formulaire valide");
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 9 -- Paiement}
+
+\subsection{Objectif}
+
+Gérer deux exceptions lors d'un paiement~: dépassement de plafond et carte expirée.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo9\_2.java -- PaiementRefuseException \& CarteExpireeException}]
+class PaiementRefuseException9 extends Exception {}
+class CarteExpireeException9 extends Exception {}
+
+public class exo9_2 {
+    double plafond = 2000.0;
+
+    void payer(exo9_2 e, double montant, boolean expiree)
+            throws PaiementRefuseException9, CarteExpireeException9 {
+        if (expiree) {
+            throw new CarteExpireeException9();
+        }
+        if (montant > e.plafond) {
+            throw new PaiementRefuseException9();
+        }
+        System.out.println("Paiement effectue");
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 10 -- Conception~: Quand Utiliser Chaque Type ?}
+
+\subsection{Objectif}
+
+Répondre aux questions de conception sur le choix du type d'exception.
+
+\subsection{Synthèse}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.95\textwidth}{L{4cm} X}
+\toprule
+\textbf{\color{primarycolor}Question} &
+\textbf{\color{primarycolor}Réponse} \\
+\midrule
+Quand utiliser \textit{checked} ? &
+Pour les erreurs \textbf{récupérables} et externes~: fichier introuvable,
+connexion réseau, base de données. Le compilateur force la gestion. \\
+\addlinespace[0.2cm]
+Quand utiliser \textit{unchecked} ? &
+Pour les \textbf{bugs logiques} du développeur~: index hors limites,
+argument nul, montant invalide. Pas de \texttt{throws} requis. \\
+\addlinespace[0.2cm]
+Pourquoi créer une exception personnalisée ? &
+Pour donner un \textbf{sens métier} précis à l'erreur, améliorer la
+lisibilité du code et faciliter la maintenance. \\
+\bottomrule
+\end{tabularx}
+\caption{Synthèse sur la conception des exceptions}
+\end{table}

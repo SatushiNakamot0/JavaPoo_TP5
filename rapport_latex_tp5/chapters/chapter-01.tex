@@ -1,0 +1,396 @@
+\chapter{Exceptions Système}
+\sloppy
+
+\section{Exercice 1 -- Division Sécurisée}
+
+\subsection{Objectif}
+
+Calculer la division de deux entiers saisis par l'utilisateur en gérant
+la division par zéro et la saisie invalide.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo1.java -- Division sécurisée}]
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class exo1 {
+
+    public exo1() {}
+
+    public void calculer(exo1 e, int a, int b) {
+        try {
+            if (b == 0) {
+                throw new ArithmeticException();
+            }
+            System.out.println(a / b);
+        } catch (ArithmeticException ex) {
+            System.out.println("Erreur : Division par zero.");
+        } catch (Exception ex) {
+            System.out.println("Erreur inattendue.");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        try {
+            System.out.print("Enter a : ");
+            int a = sc.nextInt();
+            System.out.print("Enter b : ");
+            int b = sc.nextInt();
+            exo1 d = new exo1();
+            d.calculer(d, a, b);
+        } catch (InputMismatchException ex) {
+            System.out.println("Erreur : Saisie invalide, entrez des entiers.");
+        }
+        sc.close();
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+Le bloc \texttt{try/catch} dans la méthode \texttt{calculer()} intercepte
+l'\texttt{ArithmeticException} levée explicitement via \texttt{throw} lorsque
+le diviseur est nul. Dans le \texttt{main}, un second \texttt{try/catch}
+capture l'\texttt{InputMismatchException} levée par \texttt{Scanner} en cas de
+saisie non entière.
+
+\begin{infobox}
+    \centering\vspace{0.2cm}
+    {\large Le mot-clé \texttt{throw} permet de lever manuellement une exception
+    depuis n'importe quel point du code.}
+    \vspace{0.2cm}
+\end{infobox}
+
+\section{Exercice 2 -- NullPointerException}
+
+\subsection{Objectif}
+
+Afficher la longueur d'une chaîne en gérant le cas où elle est \texttt{null},
+d'abord sans \texttt{try/catch} puis avec.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo2.java -- NullPointerException}]
+public class exo2 {
+
+    public void longueurSansCatch(exo2 e, String s) {
+        if (s == null) {
+            System.out.println("Null");
+        } else {
+            System.out.println(s.length());
+        }
+    }
+
+    public void longueurAvecCatch(exo2 e, String s) {
+        try {
+            System.out.println(s.length());
+        } catch (NullPointerException ex) {
+            System.out.println("Null");
+        }
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+La version sans \texttt{try/catch} utilise une condition \texttt{if} pour
+tester la nullité avant d'appeler la méthode. La version avec \texttt{try/catch}
+laisse la \texttt{NullPointerException} se lever et la capture dans le bloc
+\texttt{catch}.
+
+\section{Exercice 3 -- Tableau Sécurisé}
+
+\subsection{Objectif}
+
+Permettre à l'utilisateur d'accéder à un index d'un tableau de taille 5
+en proposant deux approches.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo3.java -- Accès sécurisé au tableau}]
+public class exo3 {
+
+    public void versionIf(exo3 e, int[] tab, int index) {
+        if (index >= 0 && index < 5) {
+            System.out.println(tab[index]);
+        } else {
+            System.out.println("Hors limites");
+        }
+    }
+
+    public void versionCatch(exo3 e, int[] tab, int index) {
+        try {
+            System.out.println(tab[index]);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Hors limites");
+        }
+    }
+}
+\end{lstlisting}
+
+\subsection{Comparaison des deux approches}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.85\textwidth}{C{3cm} X X}
+\toprule
+\textbf{\color{primarycolor}Critère} &
+\textbf{\color{primarycolor}Version if} &
+\textbf{\color{primarycolor}Version try/catch} \\
+\midrule
+Lisibilité & Explicite & Nécessite de connaître l'exception \\
+\addlinespace[0.15cm]
+Performance & Légèrement plus rapide & Surcoût si exception levée \\
+\addlinespace[0.15cm]
+Usage recommandé & Vérification préventive & Cas imprévisibles \\
+\bottomrule
+\end{tabularx}
+\caption{Comparaison entre vérification par \texttt{if} et \texttt{try/catch}}
+\end{table}
+
+\section{Exercice 4 -- Conversion d'Entier}
+
+\subsection{Objectif}
+
+Convertir une chaîne saisie en entier et afficher un message clair en cas d'échec.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo4.java -- NumberFormatException}]
+public class exo4 {
+
+    public void convertir(exo4 e, String s) {
+        try {
+            int val = Integer.parseInt(s);
+            System.out.println(val);
+        } catch (NumberFormatException ex) {
+            System.out.println("Erreur : La chaine saisie ne peut pas etre convertie en entier.");
+        }
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+\texttt{Integer.parseInt()} lève une \texttt{NumberFormatException} si la
+chaîne ne représente pas un entier valide. Ce type d'exception est une
+\textit{unchecked exception} (hérite de \texttt{RuntimeException}).
+
+\section{Exercice 5 -- Choix d'Exception}
+
+\subsection{Objectif}
+
+Créer une méthode \texttt{racineCarree(int x)} qui lève une exception si \texttt{x < 0}.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo5.java -- IllegalArgumentException}]
+public class exo5 {
+
+    public int racineCarree(exo5 e, int x) {
+        if (x < 0) {
+            throw new IllegalArgumentException();
+        }
+        return (int) Math.sqrt(x);
+    }
+}
+\end{lstlisting}
+
+\subsection{Justification du choix}
+
+\begin{accentbox}
+    \centering\vspace{0.3cm}
+    {\large \texttt{IllegalArgumentException} est choisie car l'erreur provient
+    d'un \textbf{argument invalide} passé par le développeur.
+    C'est une \textit{unchecked exception} qui ne nécessite pas de
+    \texttt{throws} dans la signature, ce qui est adapté à ce type de
+    précondition logique.}
+    \vspace{0.3cm}
+\end{accentbox}
+
+\section{Exercice 6 -- IllegalStateException}
+
+\subsection{Objectif}
+
+Simuler une machine avec un état ON/OFF~; lever une exception si on tente de
+la démarrer alors qu'elle est déjà allumée.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo6.java -- IllegalStateException}]
+public class exo6 {
+
+    boolean estAllumee;
+
+    public exo6() {
+        this.estAllumee = false;
+    }
+
+    public void demarrer(exo6 e) {
+        if (e.estAllumee) {
+            throw new IllegalStateException();
+        }
+        e.estAllumee = true;
+        System.out.println("Machine ON");
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+\texttt{IllegalStateException} est l'exception standard Java à utiliser
+lorsqu'une méthode est appelée à un moment où l'\textbf{état de l'objet}
+ne le permet pas.
+
+\section{Exercice 7 -- Propagation d'Exception}
+
+\subsection{Objectif}
+
+Illustrer la propagation d'exceptions à travers une chaîne d'appels
+A $\rightarrow$ B $\rightarrow$ C.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo7.java -- Propagation}]
+public class exo7 {
+
+    public void methodeC(exo7 e) throws Exception {
+        throw new Exception();
+    }
+
+    public void methodeB(exo7 e) throws Exception {
+        e.methodeC(e);
+    }
+
+    public void methodeA(exo7 e) {
+        try {
+            e.methodeB(e);
+        } catch (Exception ex) {
+            System.out.println("Erreur interceptee par A");
+        }
+    }
+}
+\end{lstlisting}
+
+\subsection{Schéma de propagation}
+
+\begin{infobox}
+    \centering\vspace{0.2cm}
+    {\large \texttt{C} lance l'exception $\rightarrow$ \texttt{B} la propage
+    (\texttt{throws}) $\rightarrow$ \texttt{A} la capture (\texttt{catch})}
+    \vspace{0.2cm}
+\end{infobox}
+
+\section{Exercice 8 -- Checked Exception}
+
+\subsection{Objectif}
+
+Créer une méthode \texttt{verifierAge(int age) throws Exception} qui lève une
+exception si l'âge est inférieur à 18.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo8.java -- Checked Exception}]
+public class exo8 {
+
+    public void verifierAge(exo8 e, int age) throws Exception {
+        if (age < 18) {
+            throw new Exception();
+        }
+    }
+
+    public static void main(String[] args) {
+        exo8 e = new exo8();
+        try {
+            e.verifierAge(e, 15);
+            System.out.println("Age valide.");
+        } catch (Exception ex) {
+            System.out.println("Erreur : Age inferieur a 18.");
+        }
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+En utilisant \texttt{throws Exception}, le compilateur \textbf{oblige}
+l'appelant à gérer l'exception. C'est le comportement des
+\textit{checked exceptions}.
+
+\section{Exercice 9 -- Exception Personnalisée Vérifiée}
+
+\subsection{Objectif}
+
+Créer une \texttt{AgeException} personnalisée et l'utiliser pour vérifier un âge.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo9.java -- AgeException personnalisée}]
+class AgeException extends Exception {}
+
+public class exo9 {
+
+    public void verifierAge(exo9 e, int age) throws AgeException {
+        if (age < 18) {
+            throw new AgeException();
+        }
+    }
+
+    public static void main(String[] args) {
+        exo9 e = new exo9();
+        try {
+            e.verifierAge(e, 15);
+            System.out.println("Age valide.");
+        } catch (AgeException ex) {
+            System.out.println("Erreur : Age inferieur a 18.");
+        }
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 10 -- Comparaison Checked / Unchecked}
+
+\subsection{Objectif}
+
+Comparer les deux approches~: \texttt{Exception} (checked) et \texttt{RuntimeException} (unchecked).
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo10.java -- Comparaison Checked vs Unchecked}]
+public class exo10 {
+
+    public void verifierChecked(exo10 e, int age) throws Exception {
+        if (age < 18) {
+            throw new Exception();
+        }
+    }
+
+    public void verifierUnchecked(exo10 e, int age) {
+        if (age < 18) {
+            throw new RuntimeException();
+        }
+    }
+}
+\end{lstlisting}
+
+\subsection{Comparaison}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.9\textwidth}{C{3.5cm} X X}
+\toprule
+\textbf{\color{primarycolor}Critère} &
+\textbf{\color{primarycolor}Exception (Checked)} &
+\textbf{\color{primarycolor}RuntimeException (Unchecked)} \\
+\midrule
+Vérification & À la compilation & Seulement à l'exécution \\
+\addlinespace[0.15cm]
+Signature & Oblige \texttt{throws} & Aucun \texttt{throws} requis \\
+\addlinespace[0.15cm]
+Usage & Erreurs récupérables externes & Bugs logiques du développeur \\
+\bottomrule
+\end{tabularx}
+\caption{Comparaison entre \texttt{Exception} et \texttt{RuntimeException}}
+\end{table}

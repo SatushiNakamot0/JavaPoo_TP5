@@ -1,0 +1,416 @@
+\chapter{Généricité}
+\sloppy
+
+\section{Exercice 1 -- Classe Générique \texttt{Boite<T>}}
+
+\subsection{Objectif}
+
+Créer une classe générique \texttt{Boite<T>} avec les méthodes \texttt{setContenu}
+et \texttt{getContenu}, testée avec \texttt{String} et \texttt{Integer}.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo1\_3.java -- Boite générique}]
+public class exo1_3<T> {
+    T contenu;
+
+    void setContenu(exo1_3<T> e, T contenu) {
+        e.contenu = contenu;
+    }
+
+    T getContenu(exo1_3<T> e) {
+        return e.contenu;
+    }
+
+    public static void main(String[] args) {
+        exo1_3<String> boiteS = new exo1_3<>();
+        boiteS.setContenu(boiteS, "Java");
+        System.out.println("Contenu String : " + boiteS.getContenu(boiteS));
+
+        exo1_3<Integer> boiteI = new exo1_3<>();
+        boiteI.setContenu(boiteI, 42);
+        System.out.println("Contenu Integer : " + boiteI.getContenu(boiteI));
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+Le paramètre de type \texttt{T} est résolu à la compilation selon le type
+utilisé lors de l'instanciation. Cela garantit la \textbf{sûreté de type}
+(\textit{type-safety}) sans duplication de code.
+
+\section{Exercice 2 -- Classe \texttt{Paire<T, U>}}
+
+\subsection{Objectif}
+
+Créer une classe générique à deux paramètres de type avec une méthode
+\texttt{afficherPaire()}.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo2\_3.java -- Paire générique}]
+public class exo2_3<T, U> {
+    T premier;
+    U second;
+
+    public exo2_3(T premier, U second) {
+        this.premier = premier;
+        this.second = second;
+    }
+
+    void afficherPaire(exo2_3<T, U> p) {
+        System.out.println("Paire -> Premier: " + p.premier
+                + ", Second: " + p.second);
+    }
+
+    public static void main(String[] args) {
+        exo2_3<String, Integer> paire = new exo2_3<>("Java", 2026);
+        paire.afficherPaire(paire);
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 3 -- Interface Générique \texttt{Calcul<T>}}
+
+\subsection{Objectif}
+
+Définir une interface générique \texttt{Calcul<T>} et l'implémenter pour
+\texttt{Integer} et \texttt{Double}.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo3\_3.java -- Interface Calcul générique}]
+interface Calcul<T> {
+    T addition(T a, T b);
+}
+
+class CalculInt implements Calcul<Integer> {
+    public Integer addition(Integer a, Integer b) {
+        return a + b;
+    }
+}
+
+class CalculDouble implements Calcul<Double> {
+    public Double addition(Double a, Double b) {
+        return a + b;
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 4 -- Interface \texttt{Comparateur<T>}}
+
+\subsection{Objectif}
+
+Définir une interface \texttt{Comparateur<T>} et l'implémenter pour
+\texttt{Integer} (par valeur) et \texttt{String} (par longueur).
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo4\_3.java -- Interface Comparateur}]
+interface Comparateur4<T> {
+    int comparer(T a, T b);
+}
+
+class ComparateurInt4 implements Comparateur4<Integer> {
+    public int comparer(Integer a, Integer b) {
+        return a.compareTo(b);
+    }
+}
+
+class ComparateurString4 implements Comparateur4<String> {
+    public int comparer(String a, String b) {
+        return Integer.compare(a.length(), b.length());
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+La valeur retournée par \texttt{comparer()} suit la convention Java~:
+négatif si $a < b$, zéro si $a = b$, positif si $a > b$.
+
+\section{Exercice 5 -- Deuxième Implémentation de \texttt{Comparateur<T>}}
+
+\subsection{Objectif}
+
+Réimplémenter l'interface \texttt{Comparateur<T>} dans un fichier indépendant
+pour consolider la compréhension.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo5\_3.java -- Comparateur5}]
+interface Comparateur5<T> {
+    int comparer(T a, T b);
+}
+
+class ComparateurInt5 implements Comparateur5<Integer> {
+    public int comparer(Integer a, Integer b) {
+        return a.compareTo(b);
+    }
+}
+
+class ComparateurString5 implements Comparateur5<String> {
+    public int comparer(String a, String b) {
+        return Integer.compare(a.length(), b.length());
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 6 -- Méthodes Génériques Statiques}
+
+\subsection{Objectif}
+
+Créer deux méthodes statiques génériques~: \texttt{afficherTableau(T[])}
+et \texttt{getPremier(T[])}.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo6\_3.java -- Méthodes génériques statiques}]
+public class exo6_3 {
+
+    public static <T> void afficherTableau(T[] tableau) {
+        for (T element : tableau) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+    }
+
+    public static <T> T getPremier(T[] tableau) {
+        if (tableau.length > 0) {
+            return tableau[0];
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        Integer[] nombres = {10, 20, 30, 40, 50};
+        String[] mots = {"Java", "Data", "ENSAH"};
+
+        afficherTableau(nombres);
+        System.out.println("Premier : " + getPremier(nombres));
+        afficherTableau(mots);
+        System.out.println("Premier : " + getPremier(mots));
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 7 -- Borne Supérieure \texttt{<T extends Number>}}
+
+\subsection{Objectif}
+
+Créer une méthode générique bornée qui calcule la somme de deux nombres
+de n'importe quel type numérique.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo7\_3.java -- Borne supérieure}]
+public class exo7_3 {
+
+    public static <T extends Number> double somme(T a, T b) {
+        return a.doubleValue() + b.doubleValue();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Somme : " + somme(5, 3.14));
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+\begin{accentbox}
+    \centering\vspace{0.3cm}
+    {\large La borne \texttt{<T extends Number>} restreint le paramètre
+    de type aux sous-classes de \texttt{Number} (\texttt{Integer},
+    \texttt{Double}, \texttt{Float}\ldots), permettant d'appeler
+    \texttt{doubleValue()} en toute sécurité.}
+    \vspace{0.3cm}
+\end{accentbox}
+
+\section{Exercice 8 -- Héritage Générique (Animal / Chien)}
+
+\subsection{Objectif}
+
+Créer une classe générique \texttt{Animal<T>} et une sous-classe
+\texttt{Chien} qui fixe le type à \texttt{String}.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo8\_3.java -- Héritage générique}]
+class Animal<T> {
+    T nom;
+}
+
+class Chien extends Animal<String> {
+    public Chien(String nom) {
+        this.nom = nom;
+    }
+}
+
+public class exo8_3 {
+    public static void main(String[] args) {
+        Chien c = new Chien("Rex");
+        System.out.println("Nom du chien : " + c.nom);
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 9 -- Héritage Paramétré (Vehicule / Voiture)}
+
+\subsection{Objectif}
+
+Créer une classe générique \texttt{Vehicule<T>} et une sous-classe
+\texttt{Voiture<T>} qui hérite du paramètre de type.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo9\_3.java -- Vehicule et Voiture génériques}]
+class Vehicule<T> {
+    T vitesse;
+}
+
+class Voiture<T> extends Vehicule<T> {
+    public Voiture(T vitesse) {
+        this.vitesse = vitesse;
+    }
+}
+
+public class exo9_3 {
+    public static void main(String[] args) {
+        Voiture<Integer> v = new Voiture<>(120);
+        System.out.println("Vitesse : " + v.vitesse);
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 10 -- Repository Générique}
+
+\subsection{Objectif}
+
+Créer un \texttt{Repository<T>} générique et une classe
+\texttt{UserRepository} qui le spécialise pour les objets \texttt{User}.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo10\_3.java -- Repository générique}]
+class User {
+    String nom;
+    public User(String nom) { this.nom = nom; }
+    public String toString() { return "User: " + nom; }
+}
+
+class Repository<T> {
+    void save(T obj) {
+        System.out.println("Objet sauvegarde : " + obj.toString());
+    }
+}
+
+class UserRepository extends Repository<User> {}
+
+public class exo10_3 {
+    public static void main(String[] args) {
+        User u = new User("Yazid");
+        UserRepository repo = new UserRepository();
+        repo.save(u);
+    }
+}
+\end{lstlisting}
+
+\section{Exercice 11 -- Wildcard \texttt{<?>}}
+
+\subsection{Objectif}
+
+Créer une méthode \texttt{afficherListe(List<?> liste)} acceptant
+n'importe quel type de liste.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo11\_3.java -- Wildcard ?}]
+import java.util.List;
+import java.util.ArrayList;
+
+public class exo11_3 {
+
+    void afficherListe(List<?> liste) {
+        for (Object obj : liste) {
+            System.out.print(obj + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        List<String> noms = new ArrayList<>();
+        noms.add("Yazid");
+        noms.add("ENSAH");
+
+        exo11_3 e = new exo11_3();
+        e.afficherListe(noms);
+    }
+}
+\end{lstlisting}
+
+\subsection{Explication}
+
+Le wildcard \texttt{<?>} signifie \og n'importe quel type \fg{}. Il permet
+d'écrire une méthode générique sans spécifier de paramètre de type, mais
+en contrepartie on ne peut \textbf{pas} ajouter d'éléments à la liste
+(sauf \texttt{null}).
+
+\section{Exercice 12 -- Wildcard Borné \texttt{<? extends Number>}}
+
+\subsection{Objectif}
+
+Créer une méthode \texttt{afficherNombres(List<? extends Number>)} testée
+avec \texttt{List<Integer>} et \texttt{List<Double>}.
+
+\subsection{Code source}
+
+\begin{lstlisting}[language=Java, caption={exo12\_3.java -- Wildcard borné}]
+import java.util.List;
+import java.util.ArrayList;
+
+public class exo12_3 {
+
+    void afficherNombres(List<? extends Number> liste) {
+        for (Number n : liste) {
+            System.out.print(n + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        List<Integer> entiers = new ArrayList<>();
+        entiers.add(10);
+        entiers.add(20);
+
+        List<Double> reels = new ArrayList<>();
+        reels.add(15.5);
+        reels.add(25.5);
+
+        exo12_3 e = new exo12_3();
+        e.afficherNombres(entiers);
+        e.afficherNombres(reels);
+    }
+}
+\end{lstlisting}
+
+\subsection{Comparaison des Wildcards}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.95\textwidth}{C{3.5cm} X X}
+\toprule
+\textbf{\color{primarycolor}Wildcard} &
+\textbf{\color{primarycolor}Signification} &
+\textbf{\color{primarycolor}Usage typique} \\
+\midrule
+\texttt{<?>} & N'importe quel type & Lecture seule, type inconnu \\
+\addlinespace[0.15cm]
+\texttt{<? extends T>} & T ou ses sous-types & Lecture d'une collection de T \\
+\addlinespace[0.15cm]
+\texttt{<? super T>} & T ou ses super-types & Écriture dans une collection \\
+\bottomrule
+\end{tabularx}
+\caption{Comparaison des wildcards en Java}
+\end{table}
